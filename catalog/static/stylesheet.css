@@ -9,3 +9,12 @@
 h1 {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
+.w3-button:hover {
+    color: rgb(92, 128, 124);
+}
+
+.width33 {
+    width: 33%;
+}
+

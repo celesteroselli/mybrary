@@ -25,15 +25,15 @@
   {% if book_list %}
   {% for book in book_list %}
   <div class="w3-cell-row w3-margin-bottom">
-    <div class="w3-cell w3-border-right w3-center">
+    <div class="w3-cell w3-border-right w3-center width33">
       <h3><a href="{% url 'book_detail' book.pk %}">{{ book.title }}</a></h3>
       <p>{{ book.isbn }}</p>
     </div>
-    <div class="w3-cell w3-border-right w3-center">
+    <div class="w3-cell w3-border-right w3-center width33">
       <p>{{ book.genre }}</p>
       <h3><a href="{% url 'book_delete' book.pk %}">Delete</a></h3>
     </div>
-    <div class="w3-cell w3-center">
+    <div class="w3-cell w3-center width33">
       <p><a>{{ book.status }}</a></p>
     {% if book.status == 'AVAILABLE' %}
       <h3><a href="{% url 'loan_add' book.pk %}">Loan</a></h3>
