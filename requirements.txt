@@ -45,4 +45,3 @@ uritemplate==4.1.1
 urllib3==1.26.7
 watchdog==2.1.6
 whitenoise==6.0.0
-xlrd==2.0.1
