@@ -1,0 +1,10 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="h-100 bg-white shadow me-2 py-4">
+    <div class="border border-5 rounded h-100 mx-4 pt-4">
+        <h2></h2>Yay! You've created {{ board.name }}</h2>
+        <h4>Share it with your friends:</h4>
+        <h4>mybrary.com/bulletin/{{board.pk}}/join/</h4>
+    </div>
+{% endblock %}

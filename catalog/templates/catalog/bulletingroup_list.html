@@ -1,0 +1,68 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="h-100 bg-white shadow me-2 py-4">
+    <div class="border border-5 rounded h-100 mx-4 pt-4">
+        <h2 class="text-center">The Bulletin Board</h2>
+        <h5 class="text-muted text-center">Mybrary's Social Network</h5>
+        <div class="row mt-3">
+          <div class="col border-end border-2">
+            <p class="text-center mb-1"><a href="" class="">Book Lists</a></p>
+          </div>
+          <div class="col border-end border-2">
+            <p class="text-center mb-1"><a href="" class="">Newsletters</a></p>
+          </div>
+          <div class="col">
+            <p class="text-center mb-1"><a type="button" class=""  data-bs-toggle="modal" data-bs-target="#exampleModal">Add Board</a></p>
+          </div>
+        </div>
+        <div class="board_grid mt-4">
+          {% for board in boards %}
+          <div>
+          <h3 class="text-center m-0" style="position:relative; top:14px; z-index: 1;"><i class="bi bi-pin-fill m-0"></i></h3>
+          <div class="card mx-auto" style="width: 15rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{ board.name }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Members:</h6>
+              <ul>
+                {% for member in board.members.all|slice:"5"%}
+                <li>{{ member }}</li>
+                {% endfor %}
+              </ul>
+              <p class="text-center mb-1"><a href="{% url 'bulletin' board.pk %}" class="card-link btn btn-primary">Open Group</a></p>
+            </div>
+          </div>
+        </div>
+             
+          {% empty %}
+          <h5 class="text-center">No boards yet. Want to <a type="button" class=""  data-bs-toggle="modal" data-bs-target="#exampleModal">add one</a> or <a>join one</a>?</h5>
+          {% endfor %}
+    </div>
+
+     <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Bulletin Board</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id='form_input_block'>
+            <form method="post">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button class="button is-success is-fullwidth is-medium mt-5" type="submit">submit
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %} 

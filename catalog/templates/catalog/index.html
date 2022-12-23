@@ -1,0 +1,65 @@
+{% extends "base_generic.html" %}
+{% block content %}
+
+<div class="h-100 bg-white shadow me-2 px-4">
+    <h1 class="px-3 pt-3 text-center">Welcome to mybrary</h1>
+    <h4 class="text-muted text-center">{{ user.library.name }} Dashboard</h4>
+    <hr class="" style="margin-top:2em; margin-bottom:2em;">
+    <div class="row">
+        <div class="col-md-6">
+          <div class="rounded border shadow" style="background-color:#fcf7ed; height:89%;">
+            <h4 class="text-center pt-3">Library Loans</h4>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Book</th>
+                  <th scope="col">Due</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {% for LoanInstance in loans %}
+                <tr>
+                  <td>{{ LoanInstance.loaner }}</td>
+                  <td>{{ LoanInstance.book_loaned|truncatechars:"30" }}</td>
+                  <td>{{ LoanInstance.due_date|date:"SHORT_DATE_FORMAT"}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            {% if not loans %}
+            <h4 class="text-center">No loans in your library</h4>
+            {% endif %}
+          </div>
+      </div>
+      <div class="col-md-6 row d-flex justify-content-around">
+        <h4 class="m-3 ms-5 text-center">Recent Newsletters</h4>
+      {% for newsletter in newsletters|slice:"2" %}
+      <div class="card mb-3 ms-4" style="width: 12rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{newsletter.title}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">By {{newsletter.author}}</h6>
+          <p class="card-text">{{newsletter.desc|truncatechars:"50"}}</p>
+          <a href="{{newsletter.link}}" class="card-link">Open</a>
+        </div>
+      </div>
+      {% endfor %}
+      </div>
+    </div>
+    <div class="row pb-4">
+      <h4 class="m-3 ms-5">Recent Books Added...</h4>
+      <div class="row book_grid">
+        {% for book in books|slice:"4"  %}
+        <div class="d-flex justify-content-center">
+          <a class="text-decoration-none text-secondary" href="{% url 'book_detail' book.pk %}">
+             <img height="215px" class="shadow thumbnail border border-2" src={{book.image_src}}>
+             <p class="text-center" >{{ book.title|truncatechars:16 }}</p>
+         </a>
+         </div>
+        {% endfor  %}
+      </div>
+
+    </div>
+</div>
+
+{% endblock %} 

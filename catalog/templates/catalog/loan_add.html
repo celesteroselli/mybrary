@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class=" mw-100 h-100 bg-white shadow pt-3">
+  <div class="px-3 pt-2" id='form_input_block'>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="button is-success is-fullwidth is-medium mt-5" type="submit">submit
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}

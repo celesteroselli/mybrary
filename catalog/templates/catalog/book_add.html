@@ -1,0 +1,25 @@
+{% extends "base_generic.html" %}
+{% block content %}
+
+<div class="row mw-100 h-100 bg-white shadow pt-3">
+<div class="grid_container">
+{% for book in object_list %}
+   <div class="d-flex justify-content-center">
+    <a class="text-decoration-none text-secondary" href="{% url 'book_detail' book.pk %}">
+       <img height="215px" class="shadow thumbnail border border-2" src={{book.image_src}}>
+       <p class="text-center" >{{ book.title|truncatechars:16 }}</p>
+   </a>
+   </div>
+{% empty %}
+<p>No books in your catalog.</p>
+
+{% endfor %}
+
+  </div>
+    <!--Modals-->
+  <!--Add Book Modal-->
+
+
+</div>
+
+{% endblock %} 

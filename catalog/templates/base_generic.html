@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Mybrary</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Add additional CSS in static file -->
+  {% load static %}
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'stylesheet.css' %}">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <!--Fonts-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg_blue" style="width:99%;">
+    <div class="row bg-blue">
+      <div class="col-lg-3">
+        <div class="bg-light shadow h-100 pt-2">
+          <div class="sticky-top">
+        <div class="pb-4">
+          <img class="mx-3 float-start d-xs-none d-sm-block d-md-block" src="{% static 'logo.png' %}" width="80vw">
+          <h2 class="py-3 text-start d-xs-none d-sm-none d-md-none d-lg-block" style="font-size: 2.25vw;" >mybrary</h2>
+        </div>
+        <div class="d-flex flex-column navbar navbar-expand-lg">
+          <div class="">
+            {% if request.user.is_authenticated %}
+          <strong><h4 style="font-size: 98%" class="float-start pt-2 text-center">{{ user.username|upper }}'S LIBRARY</h4></strong>
+            {% endif %}
+          <button class="navbar-toggler float-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"><i class="bi bi-list" style="font-size:110%;"></i></span>
+          </button>
+        </div>
+          <div class="collapse navbar-collapse w-100" id="navbarSupportedContent">
+          <ul class="nav nav-pills flex-column mb-auto mx-auto" style="width:75%;">
+            <li><hr></li>
+            <li class="nav-item">
+              {% url 'index' as url %}
+              {% if url == request.path %}
+              <a href="{{url}}" class="nav-link active text-white d-flex justify-content-between" aria-current="page">
+                <i class="bi bi-house-fill"></i>
+                <span class="d-block">Home</span>
+              </a>
+              {% else %}
+              <a href="{{url}}" class="nav-link text-dark d-flex justify-content-between " aria-current="page">
+                <i class="bi bi-house"></i>
+                <span class="d-block">Home</span>
+              </a>
+              {% endif %}
+            </li>
+            <li class="nav-item">
+              {% url 'books' as url %}
+              {% if url == request.path %}
+              <a href="{{url}}" class="nav-link active text-white d-flex justify-content-between align-items-center" aria-current="page">
+                <i class="d-block bi bi-book-fill"></i>
+                <span class="d-block">Catalog</span>
+              </a>
+              {% else %}
+              <a href="{{url}}" class="nav-link text-dark d-flex justify-content-between align-items-center" aria-current="page">
+                <i class="d-block bi bi-book"></i>
+                <span class="d-block">Catalog</span>
+              </a>
+              {% endif %}
+            </li>
+            <li class="nav-item">
+              {% url 'boards' as url %}
+              {% if url == request.path %}
+              <a href="{{url}}" class="nav-link active text-white d-flex justify-content-between align-items-center" aria-current="page">
+                <i class="bi bi-pin-fill"></i>
+                <span class="d-block">Bulletin Board</span>
+              </a>
+              {% else %}
+              <a href="{{url}}" class="nav-link text-dark d-flex justify-content-between align-items-center" aria-current="page">
+                <i class="bi bi-pin"></i>
+                <span class="d-block">Bulletin Board</span>
+              </a>
+              {% endif %}
+            </li>
+            <li class="nav-item">
+              {% url 'settings' as url %}
+              {% if url == request.path %}
+              <a href="{{url}}" class="nav-link active text-white d-flex justify-content-between" aria-current="page">
+                <i class="bi bi-gear-fill"></i>
+                <span class="d-block">Settings</span>
+              </a>
+              {% else %}
+              <a href="{{url}}" class="nav-link text-dark d-flex justify-content-between " aria-current="page">
+                <i class="bi bi-gear"></i>
+                <span class="d-block">Settings</span>
+              </a>
+              {% endif %}
+            </li>
+            <li class="mt-3"><hr></li>
+          </ul>
+        </div>
+      </div>
+      </div>
+    </div>
+    </div>
+      <div class="col-lg-9 ps-5 pt-3" style="min-height: 100vh;">
+        <div class="pb-4 mx-2">
+          <button type="button" class="btn btn-primary position-relative float-end mx-4" style="border-radius: 60px;">
+            <i class="bi bi-bell-fill"></i>
+            
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              99+
+              <span class="visually-hidden">unread messages</span>
+            </span>
+          </button>
+        <form class="w-50" action="{% url 'book_add' %}" method="get">
+          <input class="form-control me-2" name="search" type="text" placeholder="Search Catalog...">
+        </form>
+      </div>
+        <div class="h-100" style="max-width: 100%; margin-bottom:5.5rem; max-height: 85%; width:100%;">
+        {% block content %}
+        {% endblock %}
+        </div>
+      </div>
+    </div>
+
+</body>
+<div class="bg-footer d-flex p-3 justify-content-around" style="width:101%">
+  <div class="p-2">Copyright 2022 - CactusCat Software</div>
+  <div class="p-2">Made with coffee, love, and a lot of google</div>
+</div>
+
+</html>

@@ -1,0 +1,60 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="row m-2">
+    <div class="col-sm-8">
+    {% for post in board.posts.all %}
+    <div class="card mt-2 me-1">
+      <div class="card-body">
+        <h3 class="card-title">{{ post.title }}</h3>
+        <h5 class="card-subtitle my-3">By {{ post.user }}</h5>
+        {{ post.body|truncatechars:"200" }}
+      </div>
+      <ul class="list-group list-group-flush">
+        {% for comment in post.comments.all %}
+        <li class="list-group-item ms-3">
+            {{comment.body}}
+            <p class="figure-caption my-0">{{comment.user}}</p>
+        </li>
+        {% endfor %}
+        <li class="list-group-item ms-3">
+          <form method="post">
+            {% csrf_token %}
+            {{ comment_form }}
+            <button class="button is-success is-fullwidth is-medium float-end" type="submit" name="comment" value="{{ post.pk }}">submit
+            </button>
+          </form>
+          <p class="figure-caption my-0">{{comment.user}}</p>
+      </li>
+      </ul>
+    </div>
+    {% endfor %}
+    </div>
+    <div class="col-sm-4">
+      <div class="card" style="width: 16rem;">
+        <div class="card-body">
+          <div id='form_input_block' class="">
+            <form method="post">
+              {% csrf_token %}
+              {{ add_form.as_p }}
+              <button class="button is-success is-fullwidth is-medium mt-2" type="submit" name="add" value="Add">submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="card mt-3" style="width: 16rem;">
+        <div class="card-body">
+          <h5 class="card-title">Members</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Members of {{ board.name }}</h6>
+          <ul>
+            {% for member in board.members.all %}
+            <li>{{ member }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+</div> 
+{% endblock %}
+

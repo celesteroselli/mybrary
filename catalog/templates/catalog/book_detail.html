@@ -1,0 +1,67 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="row mw-100 h-100 bg-white shadow p-3 pt-4">
+  <div class="col-sm-4">
+    <img class="m-auto img-fluid" src={{book.image_src}} width=85%>
+  </div>
+  <div class="col-sm-8">
+    <a href="{% url 'books' %}"><i style="font-size: 2rem;" class="bi bi-arrow-left float-end pt-1"></i></a>
+    <h1>{{ book.title }}</h1>
+    <p>{{ book.author }}</p>
+    <p class="">{{ book.desc|truncatewords:"50" }}  <a class="" href="" class="text-decoration-none float-end">Read More</a></p>
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Delete
+</button>
+{% if book.status == 'ON LOAN' %}
+<a href="{% url 'loan_return' book.pk %}"><button type="button" class="btn btn-primary">Return</button></a>
+{% else %}
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loanModal">
+  Loan
+</button>
+{% endif %}
+
+<!-- Delete Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nevermind</button>
+        <a href="{% url 'book_delete' book.pk %}"><button type="button" class="btn btn-primary">Delete</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Loan Modal -->
+<div class="modal fade" id="loanModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Loan Out Book</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id='form_input_block'>
+          <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="button is-success is-fullwidth is-medium mt-5" type="submit">submit
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nevermind</button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+</div>
+{% endblock %}

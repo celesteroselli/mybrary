@@ -1,0 +1,44 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block content %}
+<div class="h-100 bg-white shadow me-2 p-4">
+    <h1 class="text-center">Profile</h1>
+    {% url 'settings_edit' as url %}
+    {% if url == request.path %}
+      <form method="post" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        <div class="row mt-4 d-flex justify-content-center">
+        <div class="col-sm-5">
+          <div class="border border-4 rounded d-flex py-3 justify-content-center">
+            <img src="{% static 'logo.png' %}" width="240px">
+          </div>
+        </div>
+        <div class="col-sm-5"> 
+          <p>{{ form.user }}</p>
+          <p>{{ form.name }}</p>
+          <p class="">{{ form.bio }}</p>
+          <button class="btn btn-primary float-end" type="submit">Submit</button>
+        </div>
+      </div>
+
+      </form>
+    {% else %}
+    <div class="row mt-4 d-flex justify-content-center">
+      <div class="col-sm-5">
+        <div class="border border-4 rounded d-flex py-3 justify-content-center mb-3">
+          <img src="{% static 'logo.png' %}" width="240px">
+        </div>
+      </div>
+      <div class="col-sm-5"> 
+        <p class="form-control">{{ object.user }}</p>
+        <p class="form-control"> {{ object.name }}</p>
+        <p class="form-control" style="height:170px;"> {{ object.bio }}</p>
+        <row>
+          <a class="btn btn-primary float-end" href="{% url 'settings_edit' %}">Edit</a>
+          <a class="btn btn-primary float-end mx-4" href="{% url 'logout' %}">Logout</a>
+        </row>
+      </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %} 

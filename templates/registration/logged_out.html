@@ -1,0 +1,14 @@
+{% extends "accounts_base.html" %}
+
+{% block content %}
+<div class="card shadow position-absolute start-50 translate-middle" style="width:385px; height:385px; top:43%;">
+  <h5 class="card-header">Logout</h5>
+  <div class="card-body">
+    <h5 class="card-title">You logged out!</h5>
+    <div class="py-4">
+    <p class="card-text">Click here to log in again.</p>
+    <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+  </div>
+  </div>
+</div>
+{% endblock %}

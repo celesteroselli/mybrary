@@ -1,0 +1,39 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="row mw-100 h-100 bg-white shadow p-3 pt-4">
+  <div class="col-sm-4">
+    <img class="m-auto img-fluid" src={{object.image_src}} width=85%>
+    <div class="mt-2"><a href="{% url 'loan_add' object.pk %}">Loan out book</a></div>
+  </div>
+  <div class="col-sm-8">
+    <a href="{% url 'books' %}"><i style="font-size: 2rem;" class="bi bi-arrow-left float-end pt-1"></i></a>
+    <h1>{{ object.title }}</h1>
+    <p>{{ object.author }}</p>
+    <p>{{ object.desc }} <a href="{% url 'book_detail' object.pk %}">Read Less</a></p>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Delete
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">You sure you wanna delete this book?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Nevermind</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"><a class="text-decoration-none text-white" href="{% url 'book_delete' object.pk %}">Delete</a></button>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row m-2">
+  
+</div>
+{% endblock %}
