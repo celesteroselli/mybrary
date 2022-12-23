@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora&display=swap');
+
+.bg_blue {
+    background-color: #fdfcfa;
+}
+
+.bg-footer {
+    background-color: rgb(219, 219, 219);
+}
+
+* {
+    font-family: 'Sora', sans-serif;
+}
+
+.bg-active {
+    background-color: rgb(122, 174, 196);
+}
+
+.footer {
+    position: absolute;
+    min-width:100vw;
+}
+
+.grid_container {
+    display: grid;
+    grid-row-gap: 50px;
+    grid-template-columns: auto auto auto auto auto;
+    margin: 10px;
+}
+
+@media only screen and (max-width: 1250px) {
+    .grid_container {
+        grid-template-columns: auto auto auto auto;
+    }
+  }
+
+@media only screen and (max-width: 756px) {
+    .grid_container {
+        grid-template-columns: auto auto auto;
+    }
+  }
+
+  .news_grid {
+    display: grid;
+    grid-row-gap: 50px;
+    grid-template-columns: auto;
+    margin: 10px;
+}
+
+@media only screen and (max-width: 1250px) {
+    .news_grid {
+        grid-template-columns: auto auto auto;
+    }
+  }
+
+.tab {
+    display: inline-block;
+    margin-left: 40px;
+}
+
+.board_grid {
+    display: grid;
+    grid-row-gap: 50px;
+    grid-template-columns: auto auto auto;
+    margin: 10px;
+}
+
+@media only screen and (max-width: 1250px) {
+    .board_grid {
+        grid-template-columns: auto auto;
+    }
+  }
+
+@media only screen and (max-width: 756px) {
+    .board_grid {
+        grid-template-columns: auto;
+    }
+  }
+
+  .book_grid {
+    display: grid;
+    grid-row-gap: 50px;
+    grid-template-columns: auto auto auto auto;
+    margin: 10px;
+}
+
+@media only screen and (max-width: 1256px) {
+    .book_grid {
+        grid-template-columns: auto auto;
+    }
+  }
+
+.btn-primary, .active{
+    background-color: #52664a !important;
+    border-color: #52664a !important;
+}
+
+.btn-primary:focus, .btn-primary:active {
+    border-color: rgba(82,102,72, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(82,102,72, 0.5);
+}
+
+.form-control:focus {
+    border-color: rgba(82,102,72, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(82,102,72, 0.5);
+  }
+
+a {
+    color: rgba(82,102,72);
+}
+
+a:hover {
+    color: rgba(82,102,72);
+}
+
+.text-brown {
+    color: rgba(66,26,19)
+}
+
+.char_field {
+    resize: none;
+}

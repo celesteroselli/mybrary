@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from isbnlib import *
 from datetime import *
-from django_resized import ResizedImageField
 
 class BulletinGroup(models.Model):
     name = models.CharField(max_length=100, null=True)

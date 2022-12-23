@@ -1,1 +1,1 @@
-web: gunicorn mybrary.wsgi
+web: python manage.py migrate && gunicorn mybrary.wsgi
